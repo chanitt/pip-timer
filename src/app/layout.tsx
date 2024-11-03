@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/react"
 
 const geistMono = GeistMono;
 
@@ -20,6 +21,7 @@ export default function RootLayout({
         className={`${geistMono.variable} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
