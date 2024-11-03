@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import Image from "next/image";
 
 function Timer({ setTimesUp }: { setTimesUp: (timesUp: boolean) => void }) {
     const { isSupported, requestPipWindow, pipWindow, closePipWindow } = usePiPWindow();
@@ -85,7 +86,7 @@ function Timer({ setTimesUp }: { setTimesUp: (timesUp: boolean) => void }) {
                                 onClick={handlePiPButton}
                                 className="p-2 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors"
                             >
-                                <img src="/pip.svg" alt="Pip" className="w-6 h-6" />
+                                <Image src="/pip.svg" alt="Pip" width={24} height={24} />
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent className='mb-2'>

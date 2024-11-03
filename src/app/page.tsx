@@ -3,6 +3,7 @@ import { PiPProvider } from "./pip/PiPProvider";
 import Timer from '../components/Timer';
 import { useState } from "react";
 import Head from "next/head";
+import Image from "next/image";
 export default function Home() {
   const [timesUp, setTimesUp] = useState(false);
 
@@ -30,7 +31,7 @@ export default function Home() {
         <footer className='flex flex-col items-center justify-center text-sm mt-6 p-4 border-t border-gray-300 sm:flex-row sm:justify-between'>
           <span className="mb-2 text-gray-500 sm:mb-0 sm:mr-2">Made by Chanit</span>
           <a href="https://github.com/chanitt/pip-timer" target="_blank" rel="noopener noreferrer" className="hover:opacity-75 transition-opacity">
-            <img src="/github.svg" alt="Github" className="w-6 h-6" loading="lazy" />
+            <Image src="/github.svg" alt="Github" className="w-6 h-6" width={24} height={24} loading="lazy" />
           </a>
         </footer>
 
