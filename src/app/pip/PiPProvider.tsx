@@ -4,6 +4,7 @@ import {
   useContext,
   useMemo,
   useState,
+  useEffect,
 } from "react";
 
 type PiPContextType = {
@@ -20,13 +21,16 @@ type PiPProviderProps = {
 };
 
 export function PiPProvider({ children }: PiPProviderProps) {
-  // Detect if the feature is available.
-  const isSupported = "documentPictureInPicture" in window;
-
-  // Expose pipWindow that is currently active
+  const [isSupported, setIsSupported] = useState(false);
   const [pipWindow, setPipWindow] = useState<Window | null>(null);
 
-  // Close pipWidnow programmatically
+  useEffect(() => {
+    // Check if the feature is available in the client-side environment
+    if (typeof window !== "undefined") {
+      setIsSupported("documentPictureInPicture" in window);
+    }
+  }, []);
+
   const closePipWindow = useCallback(() => {
     if (pipWindow != null) {
       pipWindow.close();
@@ -34,11 +38,9 @@ export function PiPProvider({ children }: PiPProviderProps) {
     }
   }, [pipWindow]);
 
-  // Open new pipWindow
   const requestPipWindow = useCallback(
     async (width: number, height: number) => {
-      // We don't want to allow multiple requests.
-      if (pipWindow != null) {
+      if (pipWindow != null || !isSupported) {
         return;
       }
 
@@ -47,13 +49,10 @@ export function PiPProvider({ children }: PiPProviderProps) {
         height,
       });
 
-      // Detect when window is closed by user
       pip.addEventListener("pagehide", () => {
         setPipWindow(null);
       });
 
-      // It is important to copy all parent widnow styles. Otherwise, there would be no CSS available at all
-      // https://developer.chrome.com/docs/web-platform/document-picture-in-picture/#copy-style-sheets-to-the-picture-in-picture-window
       [...document.styleSheets].forEach((styleSheet) => {
         try {
           const cssRules = [...styleSheet.cssRules]
@@ -79,18 +78,16 @@ export function PiPProvider({ children }: PiPProviderProps) {
 
       setPipWindow(pip);
     },
-    [pipWindow]
+    [pipWindow, isSupported]
   );
 
   const value = useMemo(() => {
-    {
-      return {
-        isSupported,
-        pipWindow,
-        requestPipWindow,
-        closePipWindow,
-      };
-    }
+    return {
+      isSupported,
+      pipWindow,
+      requestPipWindow,
+      closePipWindow,
+    };
   }, [closePipWindow, isSupported, pipWindow, requestPipWindow]);
 
   return <PiPContext.Provider value={value}>{children}</PiPContext.Provider>;
