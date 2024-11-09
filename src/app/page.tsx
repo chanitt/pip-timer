@@ -10,13 +10,17 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>PiP Timer - A Simple Timer for Picture-in-Picture Mode</title>
-        <meta name="description" content="Use PiP Timer to manage your time effectively with Picture-in-Picture mode." />
-        <meta name="keywords" content="timer, picture-in-picture, pip, time management, pitching, pitch" />
-        <meta property="og:title" content="PiP Timer" />
-        <meta property="og:description" content="A simple timer for Picture-in-Picture mode." />
+        <title>PiP Timer - Floating Timer for Picture-in-Picture Mode</title>
+        <meta name="description" content="PiP Timer helps you stay on track with a floating countdown timer in Picture-in-Picture mode. Perfect for pitching, presentations, and multitasking." />
+        <meta name="keywords" content="PiP Timer, Picture-in-Picture Timer, floating countdown timer, online timer, presentation timer, pitching timer, countdown, multitasking timer" />
+
+        <meta property="og:title" content="PiP Timer - Floating Countdown Timer" />
+        <meta property="og:description" content="Manage your time effectively with the PiP Timer, a floating timer for Picture-in-Picture mode. Ideal for presentations and pitches." />
         <meta property="og:url" content="https://pip-timer.vercel.app" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:title" content="PiP Timer - Floating Countdown Timer" />
+        <meta name="twitter:description" content="Use PiP Timer in Picture-in-Picture mode to manage time for pitches and presentations." />
       </Head>
 
       <div className={`flex flex-col items-center justify-center min-h-screen mx-auto font-mono ${timesUp ? 'bg-red-600' : ''}`}>
